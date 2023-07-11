@@ -266,21 +266,21 @@ class TitleState extends MusicBeatState
 	var pressedCancel:Bool;
 	var pressedEnter:Bool;
 	var isTransing:Bool=true;
-  #if mobile
-  var justTouched:Bool = false;
-  
-	for (touch in FlxG.touches.list)
-	{
-	 if (touch.justPressed)
-  {
-	 justTouched = true;
-  }
-  }
-   #end
-
 
 	override function update(elapsed:Float)
 	{
+   #if mobile
+   var justTouched:Bool = false;
+
+	 for (touch in FlxG.touches.list)
+	 {
+		if (touch.justPressed)
+	  {
+	    justTouched = true;
+	   }
+ 	  }
+	  #end
+	  
 		pressedCancel = FlxG.keys.justPressed.ESCAPE || controls.BACK;
 		pressedEnter = FlxG.keys.justPressed.ENTER || controls.ACCEPT;
 		#if mobile

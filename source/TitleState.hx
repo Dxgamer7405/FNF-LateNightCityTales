@@ -268,6 +268,7 @@ class TitleState extends MusicBeatState
 	var isTransing:Bool=true;
   #if mobile
   var justTouched:Bool = false;
+  
 	for (touch in FlxG.touches.list)
 	{
 	 if (touch.justPressed)

@@ -11,7 +11,7 @@ import openfl.utils.Assets;
 import flixel.FlxG;
 import openfl.Lib;
 #if mobile
-import shadertools.FlxShader; // for mobile
+import tools.FlxShader; // for mobile
 #end
 // i can make it in a else but i forgot how to make it
 using StringTools;

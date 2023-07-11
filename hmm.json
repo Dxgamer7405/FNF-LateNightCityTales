@@ -43,9 +43,16 @@
 			"url":"https://github.com/ianharrigan/hscript-ex"
 		},
 		{
-			"name":"FNFShaderFix",
-			"type":"haxelib",
-			"version":"0.0.1"
+			"name":"extension-androidtools",
+		  "type":"git",
+		  "ref":"main",
+	  	"url":"https://github.com/jigsaw-4277821/extension-androidtools"
+		},
+		{
+			"name":"HxShaders",
+		  "type":"git",
+		  "ref":"Development",
+	  	"url":"https://github.com/JonnycatMeow/HxShaders"
 		},
 		{
 			"name":"tjson",

@@ -180,6 +180,11 @@ class TitleState extends MusicBeatState
 
 		swagShader = new ColorSwap();
 		
+    #if mobile
+    addVirtualPad(LEFT_RIGHT, A_B);
+    addVirtualPadCamera();
+    #end
+		
 		super.create();
 
 
@@ -244,10 +249,6 @@ class TitleState extends MusicBeatState
 			}
 			#end
 
-      #if mobile
-      addVirtualPad(LEFT_RIGHT, A_B);
-      #end
-
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
 				startIntro();
@@ -269,23 +270,8 @@ class TitleState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-   #if mobile
-   var justTouched:Bool = false;
-
-	 for (touch in FlxG.touches.list)
-	 {
-		if (touch.justPressed)
-	  {
-	    justTouched = true;
-	   }
- 	  }
-	  #end
-	  
 		pressedCancel = FlxG.keys.justPressed.ESCAPE || controls.BACK;
 		pressedEnter = FlxG.keys.justPressed.ENTER || controls.ACCEPT;
-		#if mobile
-		justTouched = FlxG.keys.justPressed.ENTER || justTouched;
-		#end
 
 		if (FlxG.sound.music != null)
 		Conductor.songPosition = FlxG.sound.music.time;

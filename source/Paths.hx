@@ -243,11 +243,11 @@ class Paths
 		#if sys
 		#if MODS_ALLOWED
 		if (!ignoreMods && Util.exists(modFolders(key)))
-			return File.getContent(modFolders(key));
+			return Util.getContent(modFolders(key));
 		#end
 
 		if (Util.exists(getPreloadPath(key)))
-			return File.getContent(getPreloadPath(key));
+			return Util.getContent(getPreloadPath(key));
 
 		if (currentLevel != null)
 		{
@@ -255,12 +255,12 @@ class Paths
 			if(currentLevel != 'shared') {
 				levelPath = getLibraryPathForce(key, currentLevel);
 				if (Util.exists(levelPath))
-					return File.getContent(levelPath);
+					return Util.getContent(levelPath);
 			}
 
 			levelPath = getLibraryPathForce(key, 'shared');
 			if (Util.exists(levelPath))
-				return File.getContent(levelPath);
+				return Util.getContent(levelPath);
 		}
 		#end
 		return Assets.getText(getPath(key, TEXT));
@@ -300,7 +300,7 @@ class Paths
 			xmlExists = true;
 		}
 
-		return FlxAtlasFrames.fromSparrow((imageLoaded != null ? imageLoaded : image(key, library)), (xmlExists ? File.getContent(modsXml(key)) : file('images/$key.xml', library)));
+		return FlxAtlasFrames.fromSparrow((imageLoaded != null ? imageLoaded : image(key, library)), (xmlExists ? Util.getContent(modsXml(key)) : file('images/$key.xml', library)));
 		#else
 		return FlxAtlasFrames.fromSparrow(image(key, library), file('images/$key.xml', library));
 		#end
@@ -316,7 +316,7 @@ class Paths
 			txtExists = true;
 		}
 
-		return FlxAtlasFrames.fromSpriteSheetPacker((imageLoaded != null ? imageLoaded : image(key, library)), (txtExists ? File.getContent(modsTxt(key)) : file('images/$key.txt', library)));
+		return FlxAtlasFrames.fromSpriteSheetPacker((imageLoaded != null ? imageLoaded : image(key, library)), (txtExists ? Util.getContent(modsTxt(key)) : file('images/$key.txt', library)));
 		#else
 		return FlxAtlasFrames.fromSpriteSheetPacker(image(key, library), file('images/$key.txt', library));
 		#end

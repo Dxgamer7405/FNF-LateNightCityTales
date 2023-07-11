@@ -282,7 +282,9 @@ class TitleState extends MusicBeatState
 	{
 		pressedCancel = FlxG.keys.justPressed.ESCAPE || controls.BACK;
 		pressedEnter = FlxG.keys.justPressed.ENTER || controls.ACCEPT;
-		justTouched = FlxG.keys.justPressed.ENTER || #if mobile || justTouched #end
+		#if mobile
+		justTouched = FlxG.keys.justPressed.ENTER || justTouched
+		#end
 
 		if (FlxG.sound.music != null)
 		Conductor.songPosition = FlxG.sound.music.time;

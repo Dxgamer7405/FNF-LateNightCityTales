@@ -98,7 +98,7 @@ class Song
 		#if MODS_ALLOWED
 		var moddyFile:String = Paths.modsJson(formattedFolder + '/' + formattedSong);
 		if(Util.exists(moddyFile)) {
-			rawJson = File.getContent(moddyFile).trim();
+			rawJson = Util.getContent(moddyFile).trim();
 		}
 		#end
 

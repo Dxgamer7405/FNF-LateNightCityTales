@@ -13,7 +13,7 @@ import openfl.utils.AssetType;
 import openfl.utils.Assets as OpenFlAssets;
 import lime.utils.Assets;
 import flixel.FlxSprite;
-#if MODS_ALLOWED
+#if desktop
 import sys.io.File;
 import sys.FileSystem;
 #end
@@ -29,7 +29,7 @@ class Paths
 	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
 	inline public static var VIDEO_EXT = "mp4";
 
-	#if MODS_ALLOWED
+	#if desktop
 	public static var ignoreModFolders:Array<String> = [
 		'characters',
 		'custom_events',
@@ -191,7 +191,7 @@ class Paths
 
 	static public function video(key:String)
 	{
-		#if MODS_ALLOWED
+		#if desktop
 		var file:String = modsVideo(key);
 		if(FileSystem.exists(file)) {
 			return file;
@@ -240,11 +240,9 @@ class Paths
 	
 	static public function getTextFromFile(key:String, ?ignoreMods:Bool = false):String
 	{
-		#if sys
-		#if MODS_ALLOWED
+		#if desktop
 		if (!ignoreMods && FileSystem.exists(modFolders(key)))
 			return File.getContent(modFolders(key));
-		#end
 
 		if (FileSystem.exists(getPreloadPath(key)))
 			return File.getContent(getPreloadPath(key));
@@ -268,7 +266,7 @@ class Paths
 
 	inline static public function font(key:String)
 	{
-		#if MODS_ALLOWED
+		#if desktop
 		var file:String = modsFont(key);
 		if(FileSystem.exists(file)) {
 			return file;
@@ -279,7 +277,7 @@ class Paths
 
 	inline static public function fileExists(key:String, type:AssetType, ?ignoreMods:Bool = false, ?library:String)
 	{
-		#if MODS_ALLOWED
+		#if desktop
 		if(FileSystem.exists(mods(currentModDirectory + '/' + key)) || FileSystem.exists(mods(key))) {
 			return true;
 		}
@@ -293,7 +291,7 @@ class Paths
 
 	inline static public function getSparrowAtlas(key:String, ?library:String):FlxAtlasFrames
 	{
-		#if MODS_ALLOWED
+		#if desktop
 		var imageLoaded:FlxGraphic = returnGraphic(key);
 		var xmlExists:Bool = false;
 		if(FileSystem.exists(modsXml(key))) {
@@ -309,7 +307,7 @@ class Paths
 
 	inline static public function getPackerAtlas(key:String, ?library:String)
 	{
-		#if MODS_ALLOWED
+		#if desktop
 		var imageLoaded:FlxGraphic = returnGraphic(key);
 		var txtExists:Bool = false;
 		if(FileSystem.exists(modsTxt(key))) {
@@ -329,7 +327,7 @@ class Paths
 	// completely rewritten asset loading? fuck!
 	public static var currentTrackedAssets:Map<String, FlxGraphic> = [];
 	public static function returnGraphic(key:String, ?library:String) {
-		#if MODS_ALLOWED
+		#if desktop
 		var modKey:String = modsImages(key);
 		if(FileSystem.exists(modKey)) {
 			if(!currentTrackedAssets.exists(modKey)) {
@@ -357,7 +355,7 @@ class Paths
 
 	public static var currentTrackedSounds:Map<String, Sound> = [];
 	public static function returnSound(path:String, key:String, ?library:String) {
-		#if MODS_ALLOWED
+		#if desktop
 		var file:String = modsSounds(path, key);
 		if(FileSystem.exists(file)) {
 			if(!currentTrackedSounds.exists(file)) {
@@ -373,7 +371,7 @@ class Paths
 		// trace(gottenPath);
 		if(!currentTrackedSounds.exists(gottenPath)) 
 		#if MODS_ALLOWED
-			currentTrackedSounds.set(gottenPath, Sound.fromFile('./' + gottenPath));
+			currentTrackedSounds.set(gottenPath, Sound.fromFile(gottenPath));
 		#else
 			currentTrackedSounds.set(gottenPath, OpenFlAssets.getSound(getPath('$path/$key.$SOUND_EXT', SOUND, library)));
 		#end
@@ -381,7 +379,7 @@ class Paths
 		return currentTrackedSounds.get(gottenPath);
 	}
 	
-	#if MODS_ALLOWED
+	#if desktop
 	inline static public function mods(key:String = '') {
 		return 'mods/' + key;
 	}

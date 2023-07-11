@@ -20,7 +20,7 @@ import flixel.addons.transition.TransitionData;
 import haxe.Json;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
-#if MODS_ALLOWED
+#if desktop
 import sys.FileSystem;
 import sys.io.File;
 #end
@@ -123,7 +123,10 @@ class TitleState extends MusicBeatState
 
 	override public function create():Void
 	{
-
+    #if android
+    FlxG.android.preventDefaultKeys = [BACK];
+    #end
+   
 		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();

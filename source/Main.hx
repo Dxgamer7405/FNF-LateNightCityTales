@@ -31,6 +31,8 @@ class Main extends Sprite
 
 	public function new()
 	{
+	  SUtil.uncaughtErrorHandler();
+	  
 		super();
 
 		if (stage != null)
@@ -72,8 +74,9 @@ class Main extends Sprite
 		FlxGraphic.defaultPersist = true;
 		// the reason for this is we're going to be handling our own cache smartly
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
+		
+    SUtil.check();
 
-		#if !mobile
 		fpsVar = new FPS(10, 3, 0xFFFFFF);
 		addChild(fpsVar);
 		Lib.current.stage.align = "tl";
@@ -81,7 +84,6 @@ class Main extends Sprite
 		if(fpsVar != null) {
 			fpsVar.visible = ClientPrefs.showFPS;
 		}
-		#end
 
 		#if html5
 		FlxG.autoPause = false;

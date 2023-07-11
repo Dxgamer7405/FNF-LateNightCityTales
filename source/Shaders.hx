@@ -1,13 +1,19 @@
 package;
 
 // STOLEN FROM HAXEFLIXEL DEMO AND FROM PSYCH ENGINE 0.5.1 WITH SHADERS LOL
-import flixel.system.FlxAssets.FlxShader;
+#if windows
+import flixel.system.FlxAssets.FlxShader; // for windows
+#end
 import openfl.display.BitmapData;
 import openfl.display.Shader;
 import openfl.display.ShaderInput;
 import openfl.utils.Assets;
 import flixel.FlxG;
 import openfl.Lib;
+#if mobile
+import shadertools.FlxShader; // for mobile
+#end
+// i can make it in a else but i forgot how to make it
 using StringTools;
 typedef ShaderEffect = {
   var shader:Dynamic;

@@ -62,9 +62,21 @@ class WarningState extends MusicBeatState
 
     override function update(elapsed:Float)
     {        
+      		  #if mobile
+            var justTouched:Bool = false;
+
+		        for (touch in FlxG.touches.list)
+		        {
+			        if (touch.justPressed)
+			        {
+				        justTouched = true;
+			        }
+		        }
+		        #end
+		        
         if(youCanPreesed)
         {
-            if(FlxG.keys.justPressed.ANY)
+            if(FlxG.keys.justPressed.ANY #if mobile || justTouched #end)
             {
                 youCanPreesed=false;
                 FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);

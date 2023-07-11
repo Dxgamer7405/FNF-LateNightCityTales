@@ -32,7 +32,7 @@ import flixel.addons.effects.chainable.FlxTrailEffect;
 import flixel.addons.effects.chainable.FlxWaveEffect;
 import flixel.addons.effects.chainable.IFlxEffect;
 
-#if MODS_ALLOWED
+#if desktop
 import sys.FileSystem;
 import sys.io.File;
 #end
@@ -217,8 +217,12 @@ class CreditsState extends MusicBeatState
 
 	override function create():Void
 	{
-			super.create();
-			init();
+    #if mobile
+    addVirtualPad(LEFT_RIGHT, A_B);
+    #end
+    
+		super.create();
+		init();
 	}
 	override function update(elapsed:Float)
 	{

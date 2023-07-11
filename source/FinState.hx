@@ -20,7 +20,7 @@ import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import FlxVideo;
 
-#if MODS_ALLOWED
+#if desktop
 import sys.FileSystem;
 import sys.io.File;
 #end
@@ -93,7 +93,19 @@ class FinState extends MusicBeatState
     }
     override function update(elapsed:Float)
     {
-        if (FlxG.keys.justPressed.ENTER&&thanksforplaying.alpha==1&&canContinue)
+		        #if mobile
+            var justTouched:Bool = false;
+
+		        for (touch in FlxG.touches.list)
+		        {
+			        if (touch.justPressed)
+			        {
+				        justTouched = true;
+			        }
+		        }
+		        #end
+		        
+        if (FlxG.keys.justPressed.ENTER #if mobile || justTouched #end && thanksforplaying.alpha==1&&canContinue)
             {
                 MusicBeatState.switchState(new TitleState());
             }

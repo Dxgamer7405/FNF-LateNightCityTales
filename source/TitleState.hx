@@ -284,7 +284,7 @@ class TitleState extends MusicBeatState
 		pressedCancel = FlxG.keys.justPressed.ESCAPE || controls.BACK;
 		pressedEnter = FlxG.keys.justPressed.ENTER || controls.ACCEPT;
 		#if mobile
-		justTouched = FlxG.keys.justPressed.ENTER || justTouched
+		justTouched = FlxG.keys.justPressed.ENTER || justTouched;
 		#end
 
 		if (FlxG.sound.music != null)

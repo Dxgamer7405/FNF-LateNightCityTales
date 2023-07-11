@@ -143,8 +143,9 @@ class MusicBeatState extends FlxUIState
 		}
 		FlxTransitionableState.skipNextTransOut = false;
 	}
-	
-	#if VIDEOS_ALLOWED
+
+  /*	
+	#if desktop
 	override public function onFocus():Void
 	{
 		FlxVideo.onFocus();
@@ -157,7 +158,8 @@ class MusicBeatState extends FlxUIState
 		super.onFocusLost();
 	}
 	#end
-
+  */
+  
 	override function update(elapsed:Float)
 	{
 		//everyStep();

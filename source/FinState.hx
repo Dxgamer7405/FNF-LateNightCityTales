@@ -18,7 +18,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
-import FlxVideo;
+import hxcodec.flixel.FlxVideo;
 
 #if desktop
 import sys.FileSystem;
@@ -31,7 +31,6 @@ using StringTools;
 class FinState extends MusicBeatState
 {
     var thanksforplaying:FlxSprite;
-    var fin:FlxVideo;
 
     var jukeBoxTag:FlxSprite;
     var jukeBox:FlxSprite;
@@ -67,8 +66,9 @@ class FinState extends MusicBeatState
         jukeBoxSubText.alignment=LEFT;
         add(jukeBoxSubText);
 
-        fin=new FlxVideo(Paths.video("final"));
-        fin.finishCallback=function()
+		     var video:FlxVideo = new FlxVideo();
+	       video.onEndReached.add(video.dispose);
+	       video.play('assets/videos/final.mp4');
         {
             FlxTween.tween(thanksforplaying,{alpha:1},1.5,{onComplete:function(twn:FlxTween)
 				{
@@ -93,19 +93,7 @@ class FinState extends MusicBeatState
     }
     override function update(elapsed:Float)
     {
-		        #if mobile
-            var justTouched:Bool = false;
-
-		        for (touch in FlxG.touches.list)
-		        {
-			        if (touch.justPressed)
-			        {
-				        justTouched = true;
-			        }
-		        }
-		        #end
-		        
-        if (FlxG.keys.justPressed.ENTER #if mobile || justTouched #end && thanksforplaying.alpha==1&&canContinue)
+        if (FlxG.keys.justPressed.ENTER #if mobile || FlxG.android.justReleased.BACK #end && thanksforplaying.alpha==1&&canContinue)
             {
                 MusicBeatState.switchState(new TitleState());
             }

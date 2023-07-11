@@ -1840,6 +1840,7 @@ class PlayState extends MusicBeatState
 		char.y += char.positionArray[1];
 	}
 
+  /*
 	public function startVideo(name:String):Void {
 		#if VIDEOS_ALLOWED
 		var foundFile:Bool = false;
@@ -1882,6 +1883,7 @@ class PlayState extends MusicBeatState
 		#end
 		startAndEnd();
 	}
+*/
 
 	function startAndEnd()
 	{

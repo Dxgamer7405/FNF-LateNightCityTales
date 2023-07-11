@@ -1342,8 +1342,8 @@ class FunkinLua {
 			}
 		});
 		Lua_helper.add_callback(lua, "startVideo", function(videoFile:String) {
-			#if VIDEOS_ALLOWED
-			if(Asset2File.exists(Paths.video(videoFile))) { // idk fuck
+			#if desktop
+			if(FileSystem.exists(Paths.video(videoFile))) { // idk fuck
 				PlayState.instance.startVideo(videoFile);
 			} else {
 				luaTrace('Video file not found: ' + videoFile);

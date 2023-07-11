@@ -16,40 +16,27 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
-import FlxVideo;
+import hxcodec.flixel.FlxVideo;
 
 class OpeningState extends MusicBeatState
 {
-    var opening:FlxVideo;
-
     override function create()
     {
         super.create();
         FlxG.sound.music.volume=0;
 
-        opening=new FlxVideo(Paths.video("Opening"));
-        opening.finishCallback=function() 
+	     	var video:FlxVideo = new FlxVideo();
+		    video.onEndReached.add(video.dispose);
+		    video.play('assets/videos/Opening.mp4');
         {
             FlxG.switchState(new LoadingState(new PlayState(),true,'nightmare'));
         }
     }
     override function update(elapsed:Float)
     {
-      		  #if mobile
-            var justTouched:Bool = false;
-
-		        for (touch in FlxG.touches.list)
-		        {
-			        if (touch.justPressed)
-			        {
-				        justTouched = true;
-			        }
-		        }
-		        #end
-		        
-        if((FlxG.keys.justPressed.ESCAPE || FlxG.keys.justPressed.ENTER #if mobile || justTouched #end))
+        if((FlxG.keys.justPressed.ESCAPE #if mobile || FlxG.android.justReleased.BACK #end || FlxG.keys.justPressed.ENTER))
         {
-            opening.onVLCComplete();
+            // opening.onVLCComplete();
         }
     }
 }

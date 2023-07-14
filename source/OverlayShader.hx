@@ -1,6 +1,12 @@
 package;
 
+#if windows
 import flixel.system.FlxAssets.FlxShader;
+#end
+
+#if mobile
+import FlxShader
+#end
 
 class OverlayShader extends FlxShader
 {

@@ -12,7 +12,7 @@ class OverlayShader extends FlxShader
 			return mix(
 				1.0 - 2.0 * (1.0 - base) * (1.0 - blend),
 				2.0 * base * blend,
-				step( base, vec3(0.5) )
+				step(base, vec3(0.5))
 			);
 		}
 
